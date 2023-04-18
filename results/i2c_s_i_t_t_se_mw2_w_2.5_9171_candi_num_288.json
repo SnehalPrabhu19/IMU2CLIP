@@ -1,0 +1,45 @@
+{
+    "metrics": {
+        "s_t_metrics": {
+            "MRR": 0.015286237001419067,
+            "R@1": 0.0,
+            "R@10": 0.02777777798473835,
+            "R@50": 0.1493055522441864
+        },
+        "t_s_metrics": {
+            "MRR": 0.020083067938685417,
+            "R@1": 0.0034722222480922937,
+            "R@10": 0.02777777798473835,
+            "R@50": 0.1770833283662796
+        },
+        "num_candidates": 288
+    },
+    "configs": {
+        "model_hparams": {
+            "model_name": "i2c",
+            "model_suffix": "",
+            "imu_encoder_name": "mw2",
+            "video_encoder_name": "clip_1frame",
+            "window_sec": 2.5,
+            "target_fps": 10
+        },
+        "train_hparams": {
+            "source_modality": "imu",
+            "target_modalities": [
+                "text"
+            ],
+            "limit_train_batches": 1.0,
+            "batch_size": 32,
+            "max_epochs": 1,
+            "gpus": 1,
+            "num_workers_for_dm": 10,
+            "test_only": false,
+            "trainer_strategy": "ddp",
+            "freeze_modalities": [
+                "video"
+            ],
+            "path_load_pretrained_imu_encoder": ""
+        },
+        "path_save_checkpoint": "./saved/i2c/i2c_s_i_t_t_se_mw2_w_2.5_9171_best.ckpt"
+    }
+}

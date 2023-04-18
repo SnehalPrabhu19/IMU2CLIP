@@ -1,0 +1,8 @@
+/home/ppjain_umass_edu/.local/lib/python3.10/site-packages/torchvision/io/image.py:13: UserWarning: Failed to load image Python extension: /home/ppjain_umass_edu/.local/lib/python3.10/site-packages/torchvision/image.so: undefined symbol: _ZNK3c1010TensorImpl36is_contiguous_nondefault_policy_implENS_12MemoryFormatE
+  warn(f"Failed to load image Python extension: {e}")
+Traceback (most recent call last):
+  File "/home/ppjain_umass_edu/imu2clip/pretraining.py", line 10, in <module>
+    from lib.clip_model import ClipPLModel
+  File "/home/ppjain_umass_edu/imu2clip/lib/clip_model.py", line 6, in <module>
+    import clip
+ModuleNotFoundError: No module named 'clip'

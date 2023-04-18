@@ -134,6 +134,7 @@ def compute_metrics(source_embeddings, target_embeddings):
         query_batch = torch.mm(s[start:end], tt)  # (bsz, m) (m, n) -> (bsz, n)
         s_t_batch_results.append(query_batch)
     s_t_batch_results = torch.cat(s_t_batch_results, dim=0).view(-1)  # (n,n)
+    target = target.to(torch.device("cuda:0"))
     mrr = compute_mrr(s_t_batch_results, target, indexes=indexes).item()
     r1 = compute_r1(s_t_batch_results, target, indexes=indexes).item()
     r10 = compute_r10(s_t_batch_results, target, indexes=indexes).item()

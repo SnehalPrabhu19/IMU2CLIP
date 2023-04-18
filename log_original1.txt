@@ -1,0 +1,160 @@
+/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/site-packages/pytorch_lightning/trainer/connectors/accelerator_connector.py:474: LightningDeprecationWarning: Setting `Trainer(gpus=1)` is deprecated in v1.7 and will be removed in v2.0. Please use `Trainer(accelerator='gpu', devices=1)` instead.
+  rank_zero_deprecation(
+/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/site-packages/lightning_fabric/plugins/environments/slurm.py:166: PossibleUserWarning: The `srun` command is available on your system but is not used. HINT: If your intention is to run Lightning on SLURM, prepend your python command with `srun` like so: srun python pretraining.py ...
+  rank_zero_warn(
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+IPU available: False, using: 0 IPUs
+HPU available: False, using: 0 HPUs
+/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/site-packages/pytorch_lightning/trainer/connectors/logger_connector/logger_connector.py:67: UserWarning: Starting from v1.9.0, `tensorboardX` has been removed as a dependency of the `pytorch_lightning` package, due to potential conflicts with other packages in the ML ecosystem. For this reason, `logger=True` will use `CSVLogger` as the default logger, unless the `tensorboard` or `tensorboardX` packages are found. Please `pip install lightning[extra]` or one of them to enable TensorBoard support by default
+  warning_cache.warn(
+`Trainer(limit_train_batches=1.0)` was configured so 100% of the batches per epoch will be used..
+{'model_hparams': {'model_name': 'i2c', 'model_suffix': '', 'imu_encoder_name': 'mw2', 'video_encoder_name': 'clip_1frame', 'window_sec': 2.5, 'target_fps': 10}, 'train_hparams': {'source_modality': 'imu', 'target_modalities': ['text'], 'limit_train_batches': 1.0, 'batch_size': 32, 'max_epochs': 1, 'gpus': 1, 'num_workers_for_dm': 10, 'test_only': True, 'trainer_strategy': 'ddp', 'freeze_modalities': ['video'], 'path_load_pretrained_imu_encoder': '/home/ppjain_umass_edu/imu2clip/saved/i2c/i2c_s_i_t_t_se_mw2_w_2.5_5450_src_encoder.pt'}}
+Loading clip model ...
+loaded pretrained imu model
+Skipping training ...
+Start evaluating ...
+Reducing to 172 videos ...
+  0%|          | 0/9645 [00:00<?, ?it/s]100%|██████████| 9645/9645 [00:00<00:00, 141234.44it/s]
+/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/site-packages/torch/utils/data/dataloader.py:554: UserWarning: This DataLoader will create 20 worker processes in total. Our suggested max number of worker in current system is 2, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(_create_warning_msg(
+There are 314 windows to process.
+  0%|          | 0/9 [00:00<?, ?it/s] 11%|█         | 1/9 [00:04<00:36,  4.61s/it] 33%|███▎      | 3/9 [00:04<00:07,  1.26s/it] 56%|█████▌    | 5/9 [00:04<00:02,  1.54it/s] 78%|███████▊  | 7/9 [00:05<00:00,  2.46it/s]100%|██████████| 9/9 [00:05<00:00,  3.56it/s]Traceback (most recent call last):
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/multiprocessing/util.py", line 300, in _run_finalizers
+    finalizer()
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/multiprocessing/util.py", line 224, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/multiprocessing/util.py", line 133, in _remove_temp_dir
+    rmtree(tempdir)
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/shutil.py", line 718, in rmtree
+    _rmtree_safe_fd(fd, path, onerror)
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/shutil.py", line 675, in _rmtree_safe_fd
+    onerror(os.unlink, fullname, sys.exc_info())
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/shutil.py", line 673, in _rmtree_safe_fd
+    os.unlink(entry.name, dir_fd=topfd)
+OSError: [Errno 16] Device or resource busy: '.nfsbd0b58e6960571c700009c87'
+Traceback (most recent call last):
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/multiprocessing/util.py", line 300, in _run_finalizers
+    finalizer()
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/multiprocessing/util.py", line 224, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/multiprocessing/util.py", line 133, in _remove_temp_dir
+    rmtree(tempdir)
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/shutil.py", line 718, in rmtree
+    _rmtree_safe_fd(fd, path, onerror)
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/shutil.py", line 675, in _rmtree_safe_fd
+    onerror(os.unlink, fullname, sys.exc_info())
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/shutil.py", line 673, in _rmtree_safe_fd
+    os.unlink(entry.name, dir_fd=topfd)
+OSError: [Errno 16] Device or resource busy: '.nfse554c0db622548e600009c86'
+Traceback (most recent call last):
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/multiprocessing/util.py", line 300, in _run_finalizers
+    finalizer()
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/multiprocessing/util.py", line 224, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/multiprocessing/util.py", line 133, in _remove_temp_dir
+    rmtree(tempdir)
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/shutil.py", line 718, in rmtree
+    _rmtree_safe_fd(fd, path, onerror)
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/shutil.py", line 675, in _rmtree_safe_fd
+    onerror(os.unlink, fullname, sys.exc_info())
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/shutil.py", line 673, in _rmtree_safe_fd
+    os.unlink(entry.name, dir_fd=topfd)
+OSError: [Errno 16] Device or resource busy: '.nfse3ea7c1e72ae4d9300009c8d'
+Traceback (most recent call last):
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/multiprocessing/util.py", line 300, in _run_finalizers
+    finalizer()
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/multiprocessing/util.py", line 224, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/multiprocessing/util.py", line 133, in _remove_temp_dir
+    rmtree(tempdir)
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/shutil.py", line 718, in rmtree
+    _rmtree_safe_fd(fd, path, onerror)
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/shutil.py", line 675, in _rmtree_safe_fd
+    onerror(os.unlink, fullname, sys.exc_info())
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/shutil.py", line 673, in _rmtree_safe_fd
+    os.unlink(entry.name, dir_fd=topfd)
+OSError: [Errno 16] Device or resource busy: '.nfs9c7d79023012483300009c8b'
+Traceback (most recent call last):
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/multiprocessing/util.py", line 300, in _run_finalizers
+    finalizer()
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/multiprocessing/util.py", line 224, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/multiprocessing/util.py", line 133, in _remove_temp_dir
+    rmtree(tempdir)
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/shutil.py", line 718, in rmtree
+    _rmtree_safe_fd(fd, path, onerror)
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/shutil.py", line 675, in _rmtree_safe_fd
+    onerror(os.unlink, fullname, sys.exc_info())
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/shutil.py", line 673, in _rmtree_safe_fd
+    os.unlink(entry.name, dir_fd=topfd)
+OSError: [Errno 16] Device or resource busy: '.nfs4d8b579867effb0200009c8c'
+Traceback (most recent call last):
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/multiprocessing/util.py", line 300, in _run_finalizers
+    finalizer()
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/multiprocessing/util.py", line 224, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/multiprocessing/util.py", line 133, in _remove_temp_dir
+    rmtree(tempdir)
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/shutil.py", line 718, in rmtree
+    _rmtree_safe_fd(fd, path, onerror)
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/shutil.py", line 675, in _rmtree_safe_fd
+    onerror(os.unlink, fullname, sys.exc_info())
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/shutil.py", line 673, in _rmtree_safe_fd
+    os.unlink(entry.name, dir_fd=topfd)
+OSError: [Errno 16] Device or resource busy: '.nfs2868deb8a15d354a00009c8a'
+Traceback (most recent call last):
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/multiprocessing/util.py", line 300, in _run_finalizers
+    finalizer()
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/multiprocessing/util.py", line 224, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/multiprocessing/util.py", line 133, in _remove_temp_dir
+    rmtree(tempdir)
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/shutil.py", line 718, in rmtree
+    _rmtree_safe_fd(fd, path, onerror)
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/shutil.py", line 675, in _rmtree_safe_fd
+    onerror(os.unlink, fullname, sys.exc_info())
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/shutil.py", line 673, in _rmtree_safe_fd
+    os.unlink(entry.name, dir_fd=topfd)
+OSError: [Errno 16] Device or resource busy: '.nfsb7c76277f5080a5e00009c89'
+Traceback (most recent call last):
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/multiprocessing/util.py", line 300, in _run_finalizers
+    finalizer()
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/multiprocessing/util.py", line 224, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/multiprocessing/util.py", line 133, in _remove_temp_dir
+    rmtree(tempdir)
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/shutil.py", line 718, in rmtree
+    _rmtree_safe_fd(fd, path, onerror)
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/shutil.py", line 675, in _rmtree_safe_fd
+    onerror(os.unlink, fullname, sys.exc_info())
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/shutil.py", line 673, in _rmtree_safe_fd
+    os.unlink(entry.name, dir_fd=topfd)
+OSError: [Errno 16] Device or resource busy: '.nfscfb43cebcfb498e200009c88'
+Traceback (most recent call last):
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/multiprocessing/util.py", line 300, in _run_finalizers
+    finalizer()
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/multiprocessing/util.py", line 224, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/multiprocessing/util.py", line 133, in _remove_temp_dir
+    rmtree(tempdir)
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/shutil.py", line 718, in rmtree
+    _rmtree_safe_fd(fd, path, onerror)
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/shutil.py", line 675, in _rmtree_safe_fd
+    onerror(os.unlink, fullname, sys.exc_info())
+  File "/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/shutil.py", line 673, in _rmtree_safe_fd
+    os.unlink(entry.name, dir_fd=topfd)
+OSError: [Errno 16] Device or resource busy: '.nfs4f3e0756bf7a9cd000009c8e'
+100%|██████████| 9/9 [00:05<00:00,  1.52it/s]
+the number of queries & candidates = 288
+Start batch retrieval:
+  0%|          | 0/9 [00:00<?, ?it/s]100%|██████████| 9/9 [00:00<00:00, 26015.67it/s]
+  0%|          | 0/9 [00:00<?, ?it/s]100%|██████████| 9/9 [00:00<00:00, 30640.21it/s]
+Traceback (most recent call last):
+  File "pretraining.py", line 250, in <module>
+    train(configs)
+  File "pretraining.py", line 195, in train
+    metrics = evaluate(
+  File "/home/ppjain_umass_edu/imu2clip/lib/evaluation.py", line 91, in evaluate
+    with open(result_path, "w") as f:
+FileNotFoundError: [Errno 2] No such file or directory: './results/i2c_s_i_t_t_se_mw2_w_2.5_2122_candi_num_288.json'

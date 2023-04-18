@@ -3,7 +3,7 @@
 
 import torch
 import pytorch_lightning as pl
-from lib.loss import InfoNCE
+from lib.loss import InfoNCE, KDSP, NST
 import torchmetrics
 
 
@@ -23,13 +23,16 @@ class MultimodalContrastiveLearningModule(pl.LightningModule):
         self.target_modalities = target_modalities
         self.list_modalities = modality_to_encoder.keys()
 
-        self.loss = InfoNCE(symmetric_loss=True)
+        #self.loss = torch.nn.CrossEntropyLoss()
+        self.loss1 = InfoNCE(symmetric_loss=True)
+        self.loss2 = KDSP()
+        #self.loss3 = NST()
 
         if "imu" in self.list_modalities:
-            self.imu_encoder = modality_to_encoder["imu"]
+            self.imu_encoder = modality_to_encoder["imu"] #Student Model
 
         if "text" in self.list_modalities:
-            self.text_encoder = modality_to_encoder["text"]
+            self.text_encoder = modality_to_encoder["text"] #Teacher Model
 
         if "video" in self.list_modalities:
             self.video_encoder = modality_to_encoder["video"]
@@ -92,7 +95,12 @@ class MultimodalContrastiveLearningModule(pl.LightningModule):
         # Compute metrics for source modality <> each target modality
         for target_modality in self.target_modalities:
             y_key_modality = y[target_modality]
-            s2t_loss = self.loss(query=y_query_modality, positive_key=y_key_modality)
+            lambda_kd = 1.0
+            #celoss = self.loss(y_query_modality, y_key_modality)
+            info_nceloss = self.loss1(query=y_query_modality, positive_key=y_key_modality)
+            sploss = (self.loss2(fm_s= y_query_modality, fm_t = y_key_modality) + self.loss2(fm_s= y_query_modality, fm_t = y_key_modality) + self.loss2(fm_s= y_query_modality, fm_t = y_key_modality))/3.0 * lambda_kd
+            #nstloss = self.loss3(fm_s = y_query_modality, fm_t= y_key_modality) * lambda_kd
+            s2t_loss = info_nceloss + sploss
             loss_output += s2t_loss
             s_t_accuracy, t_s_accuracy = evaluate_batch_similarity(
                 y_query_modality, y_key_modality, device=self.device
@@ -128,9 +136,12 @@ class MultimodalContrastiveLearningModule(pl.LightningModule):
         # Compute loss for source modality <> each target modality
         for target_modality in self.target_modalities:
             y_key_modality = y[target_modality]
-            s2t_loss = self.loss(query=y_query_modality, positive_key=y_key_modality)
-
-            # Log the loss
+            lambda_kd = 1.0
+            #celoss = self.loss(y_query_modality, y_key_modality)
+            info_nceloss = self.loss1(query=y_query_modality, positive_key=y_key_modality)
+            sploss = (self.loss2(fm_s= y_query_modality, fm_t = y_key_modality) + self.loss2(fm_s= y_query_modality, fm_t = y_key_modality) + self.loss2(fm_s= y_query_modality, fm_t = y_key_modality))/3.0 * lambda_kd
+            #nstloss = self.loss3(fm_s = y_query_modality, fm_t= y_key_modality) * lambda_kd
+            s2t_loss = info_nceloss + sploss 
             str_s2t = "{source_modality_initial}2{target_modality_initial}".format(
                 source_modality_initial=self.source_modality[0],
                 target_modality_initial=target_modality[0],
@@ -142,7 +153,7 @@ class MultimodalContrastiveLearningModule(pl.LightningModule):
         return loss_output
 
     def configure_optimizers(self):
-        return torch.optim.Adam(self.parameters(), lr=2e-4)
+        return torch.optim.Adam(self.parameters(), lr=2e-4)#2e-4 7e-7
 
 
 def evaluate_batch_similarity(source_embeddings, target_embeddings, device):
@@ -234,4 +245,4 @@ class ClassificationModule(pl.LightningModule):
         return loss_output
 
     def configure_optimizers(self):
-        return torch.optim.Adam(self.parameters(), lr=5e-4)
+        return torch.optim.Adam(self.parameters(), lr=5e-4)#5e-4
