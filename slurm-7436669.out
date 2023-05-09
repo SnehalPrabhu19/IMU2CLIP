@@ -1,0 +1,64 @@
+/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/site-packages/pytorch_lightning/trainer/connectors/accelerator_connector.py:474: LightningDeprecationWarning: Setting `Trainer(gpus=3)` is deprecated in v1.7 and will be removed in v2.0. Please use `Trainer(accelerator='gpu', devices=3)` instead.
+  rank_zero_deprecation(
+/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/site-packages/lightning_fabric/plugins/environments/slurm.py:166: PossibleUserWarning: The `srun` command is available on your system but is not used. HINT: If your intention is to run Lightning on SLURM, prepend your python command with `srun` like so: srun python pretraining.py --path_configs /home/ppjain_umass_edu ...
+  rank_zero_warn(
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+IPU available: False, using: 0 IPUs
+HPU available: False, using: 0 HPUs
+/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/site-packages/pytorch_lightning/trainer/connectors/logger_connector/logger_connector.py:67: UserWarning: Starting from v1.9.0, `tensorboardX` has been removed as a dependency of the `pytorch_lightning` package, due to potential conflicts with other packages in the ML ecosystem. For this reason, `logger=True` will use `CSVLogger` as the default logger, unless the `tensorboard` or `tensorboardX` packages are found. Please `pip install lightning[extra]` or one of them to enable TensorBoard support by default
+  warning_cache.warn(
+`Trainer(limit_train_batches=1.0)` was configured so 100% of the batches per epoch will be used..
+Initializing distributed: GLOBAL_RANK: 0, MEMBER: 1/3
+Initializing distributed: GLOBAL_RANK: 2, MEMBER: 3/3
+Initializing distributed: GLOBAL_RANK: 1, MEMBER: 2/3
+----------------------------------------------------------------------------------------------------
+distributed_backend=nccl
+All distributed processes registered. Starting with 3 processes
+----------------------------------------------------------------------------------------------------
+
+{'model_hparams': {'model_name': 'i2c', 'model_suffix': 'master', 'imu_encoder_name': 'mw2', 'video_encoder_name': 'clip_1frame', 'window_sec': 2.5, 'target_fps': 10}, 'train_hparams': {'source_modality': 'imu', 'target_modalities': ['text'], 'limit_train_batches': 1.0, 'batch_size': 256, 'max_epochs': 15, 'gpus': 3, 'num_workers_for_dm': 10, 'test_only': False, 'trainer_strategy': 'ddp', 'freeze_modalities': ['video'], 'path_load_pretrained_imu_encoder': ''}}
+Loading clip model ...
+Start training: [./saved/i2c/i2c_s_i_t_t_se_mw2_w_2.5_master_best.ckpt] ...
+TRAIN
+  0%|          | 0/9645 [00:00<?, ?it/s]  3%|▎         | 279/9645 [00:00<00:03, 2782.15it/s]  6%|▌         | 558/9645 [00:00<00:03, 2496.37it/s]  8%|▊         | 815/9645 [00:00<00:03, 2479.08it/s]{'model_hparams': {'model_name': 'i2c', 'model_suffix': 'master', 'imu_encoder_name': 'mw2', 'video_encoder_name': 'clip_1frame', 'window_sec': 2.5, 'target_fps': 10}, 'train_hparams': {'source_modality': 'imu', 'target_modalities': ['text'], 'limit_train_batches': 1.0, 'batch_size': 256, 'max_epochs': 15, 'gpus': 3, 'num_workers_for_dm': 10, 'test_only': False, 'trainer_strategy': 'ddp', 'freeze_modalities': ['video'], 'path_load_pretrained_imu_encoder': ''}}
+Loading clip model ...
+Start training: [./saved/i2c/i2c_s_i_t_t_se_mw2_w_2.5_master_best.ckpt] ...
+TRAIN
+  0%|          | 0/9645 [00:00<?, ?it/s] 11%|█         | 1080/9645 [00:00<00:03, 2529.22it/s]  3%|▎         | 305/9645 [00:00<00:03, 3021.18it/s] 14%|█▍        | 1386/9645 [00:00<00:03, 2713.35it/s] 18%|█▊        | 1737/9645 [00:00<00:02, 2956.06it/s]  6%|▋         | 608/9645 [00:00<00:03, 2513.39it/s] 21%|██▏       | 2069/9645 [00:00<00:02, 3072.33it/s]  9%|▉         | 865/9645 [00:00<00:03, 2427.65it/s] 27%|██▋       | 2629/9645 [00:00<00:01, 3853.03it/s] 12%|█▏        | 1157/9645 [00:00<00:03, 2591.57it/s] 34%|███▍      | 3269/9645 [00:00<00:01, 4636.03it/s] 15%|█▍        | 1441/9645 [00:00<00:03, 2665.45it/s] 40%|███▉      | 3830/9645 [00:01<00:01, 4911.53it/s] 18%|█▊        | 1781/9645 [00:00<00:02, 2903.99it/s] 46%|████▌     | 4421/9645 [00:01<00:01, 5184.64it/s] 22%|██▏       | 2140/9645 [00:00<00:02, 3117.71it/s] 52%|█████▏    | 5010/9645 [00:01<00:00, 5370.58it/s] 28%|██▊       | 2692/9645 [00:00<00:01, 3858.04it/s] 61%|██████▏   | 5927/9645 [00:01<00:00, 6509.11it/s] 35%|███▍      | 3328/9645 [00:00<00:01, 4616.28it/s] 76%|███████▌  | 7299/9645 [00:01<00:00, 8670.12it/s] 41%|████      | 3908/9645 [00:01<00:01, 4965.00it/s]100%|██████████| 9645/9645 [00:01<00:00, 6317.62it/s] 46%|████▋     | 4463/9645 [00:01<00:01, 5140.38it/s] 52%|█████▏    | 5032/9645 [00:01<00:00, 5283.51it/s] 63%|██████▎   | 6032/9645 [00:01<00:00, 6699.71it/s] 77%|███████▋  | 7409/9645 [00:01<00:00, 8822.22it/s]{'model_hparams': {'model_name': 'i2c', 'model_suffix': 'master', 'imu_encoder_name': 'mw2', 'video_encoder_name': 'clip_1frame', 'window_sec': 2.5, 'target_fps': 10}, 'train_hparams': {'source_modality': 'imu', 'target_modalities': ['text'], 'limit_train_batches': 1.0, 'batch_size': 256, 'max_epochs': 15, 'gpus': 3, 'num_workers_for_dm': 10, 'test_only': False, 'trainer_strategy': 'ddp', 'freeze_modalities': ['video'], 'path_load_pretrained_imu_encoder': ''}}
+Loading clip model ...
+Start training: [./saved/i2c/i2c_s_i_t_t_se_mw2_w_2.5_master_best.ckpt] ...
+TRAIN
+  0%|          | 0/9645 [00:00<?, ?it/s]100%|██████████| 9645/9645 [00:01<00:00, 6269.11it/s]  3%|▎         | 274/9645 [00:00<00:03, 2739.14it/s]  6%|▌         | 548/9645 [00:00<00:03, 2329.60it/s]  8%|▊         | 785/9645 [00:00<00:03, 2288.83it/s] 11%|█         | 1016/9645 [00:00<00:03, 2274.64it/s] 13%|█▎        | 1261/9645 [00:00<00:03, 2324.66it/s] 16%|█▋        | 1576/9645 [00:00<00:03, 2591.72it/s] 19%|█▉        | 1880/9645 [00:00<00:02, 2653.01it/s] 23%|██▎       | 2262/9645 [00:00<00:02, 2978.04it/s] 29%|██▉       | 2786/9645 [00:00<00:01, 3641.89it/s] 35%|███▍      | 3347/9645 [00:01<00:01, 4229.85it/s] 40%|███▉      | 3821/9645 [00:01<00:01, 4378.64it/s] 45%|████▍     | 4332/9645 [00:01<00:01, 4574.34it/s] 50%|████▉     | 4792/9645 [00:01<00:01, 4510.38it/s] 57%|█████▋    | 5480/9645 [00:01<00:00, 5211.21it/s] 68%|██████▊   | 6512/9645 [00:01<00:00, 6712.85it/s] 82%|████████▏ | 7861/9645 [00:01<00:00, 8728.54it/s]100%|██████████| 9645/9645 [00:01<00:00, 5558.52it/s]
+There are 528687 windows to process.
+VALIDATION
+  0%|          | 0/9645 [00:00<?, ?it/s] 21%|██        | 1994/9645 [00:00<00:00, 19830.99it/s] 72%|███████▏  | 6970/9645 [00:00<00:00, 37346.33it/s]100%|██████████| 9645/9645 [00:00<00:00, 44893.94it/s]
+There are 528687 windows to process.
+VALIDATION
+  0%|          | 0/9645 [00:00<?, ?it/s] 20%|██        | 1952/9645 [00:00<00:00, 19436.74it/s] 71%|███████   | 6804/9645 [00:00<00:00, 36471.14it/s]100%|██████████| 9645/9645 [00:00<00:00, 44558.13it/s]
+There are 528687 windows to process.
+VALIDATION
+  0%|          | 0/9645 [00:00<?, ?it/s] 17%|█▋        | 1595/9645 [00:00<00:00, 15866.79it/s] 56%|█████▌    | 5405/9645 [00:00<00:00, 28670.55it/s]100%|██████████| 9645/9645 [00:00<00:00, 39986.97it/s]
+/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/site-packages/pytorch_lightning/callbacks/model_checkpoint.py:613: UserWarning: Checkpoint directory /home/ppjain_umass_edu/AmbientAI_IMU2CLIP/saved/i2c exists and is not empty.
+  rank_zero_warn(f"Checkpoint directory {dirpath} exists and is not empty.")
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0,1,2]
+
+LOCAL_RANK: 1 - CUDA_VISIBLE_DEVICES: [0,1,2]
+
+LOCAL_RANK: 2 - CUDA_VISIBLE_DEVICES: [0,1,2]
+
+  | Name         | Type               | Params
+----------------------------------------------------
+0 | loss9        | AB                 | 0     
+1 | imu_encoder  | MW2StackRNNPooling | 850 K 
+2 | text_encoder | ClipPLModel        | 151 M 
+----------------------------------------------------
+850 K     Trainable params
+151 M     Non-trainable params
+152 M     Total params
+608.513   Total estimated model params size (MB)
+There are 68720 windows to process.
+Sanity Checking: 0it [00:00, ?it/s]/home/ppjain_umass_edu/.conda/envs/imu2clip/lib/python3.8/site-packages/pytorch_lightning/trainer/connectors/data_connector.py:488: PossibleUserWarning: Your `val_dataloader`'s sampler has shuffling enabled, it is strongly recommended that you turn shuffling off for val/test/predict dataloaders.
+  rank_zero_warn(
+There are 68720 windows to process.
+There are 68720 windows to process.
