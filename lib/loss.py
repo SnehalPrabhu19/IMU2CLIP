@@ -365,6 +365,33 @@ class AB(nn.Module):
 
 		return loss
 
+class SoftTarget(nn.Module):
+	'''
+	Distilling the Knowledge in a Neural Network
+	'''
+	def __init__(self, T):
+		super(SoftTarget, self).__init__()
+		self.T = T
+
+	def forward(self, out_s, out_t):
+		loss = F.kl_div(F.log_softmax(out_s/self.T, dim=1),
+						F.softmax(out_t/self.T, dim=1),
+						reduction='batchmean') * self.T * self.T
+
+		return loss
+
+class Logits(nn.Module):
+	'''
+	Do Deep Nets Really Need to be Deep?
+	'''
+	def __init__(self):
+		super(Logits, self).__init__()
+
+	def forward(self, out_s, out_t):
+		loss = F.mse_loss(out_s, out_t)
+
+		return loss
+	
 """					
 class VID(nn.Module):
 	'''

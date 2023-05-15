@@ -10,11 +10,11 @@
 source /home/ppjain_umass_edu/miniconda3/etc/profile.d/conda.sh
 conda activate imu2clip
 
-# cd /home/ppjain_umass_edu/AmbientAI_IMU2CLIP/
+cd /work/pi_adrozdov_umass_edu/ppjain_umass_edu/AmbientAI_IMU2CLIP/
 # bash run.sh /home/pranayr_umass_edu/imu2clip/configs/train_contrastive/ego4d_imu2text_patchrnn.yaml
 # bash run.sh /home/pranayr_umass_edu/imu2clip/configs/train_contrastive/ego4d_imu2text_patchtransformer.yaml
 # bash run.sh /home/pranayr_umass_edu/imu2clip/configs/train_contrastive/ego4d_imu2text_attentionpooled.yaml
-bash runModel.sh /home/ppjain_umass_edu/AmbientAI_IMU2CLIP/configs/train_contrastive/ego4d_imu2text_mw2.yaml
+bash runModel.sh configs/train_contrastive/ego4d_imu2text_mw2.yaml
 
 # cd /home/pranayr_umass_edu/meta_project/imu2clip/
 # bash download_videos.sh

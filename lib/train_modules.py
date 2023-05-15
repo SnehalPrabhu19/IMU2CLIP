@@ -3,7 +3,7 @@
 
 import torch
 import pytorch_lightning as pl
-from lib.loss import InfoNCE, KDSP, NST, Attention, CC, PKT, RKD, FitNets, AB
+from lib.loss import InfoNCE, KDSP, NST, Attention, CC, PKT, RKD, FitNets, AB, SoftTarget, Logits
 import torchmetrics
 
 
@@ -24,15 +24,17 @@ class MultimodalContrastiveLearningModule(pl.LightningModule):
         self.list_modalities = modality_to_encoder.keys()
 
         #self.loss = torch.nn.CrossEntropyLoss()
-        #self.loss1 = InfoNCE(symmetric_loss=True)
+        self.loss1 = InfoNCE(symmetric_loss=True)
         #self.loss2 = KDSP()
-        #self.loss3 = NST()
+        self.loss3 = NST()
         #self.loss4 = Attention()
         #self.loss5 = CC(gamma =0.4, P_order = 2)
         #self.loss6 = PKT()
         #self.loss7 = RKD(w_dist=25.0, w_angle=50.0)
         #self.loss8 = FitNets()
-        self.loss9 = AB(margin=2.0)
+        #self.loss9 = AB(margin=2.0)
+        #self.loss10 = SoftTarget(T=4.0)
+        #self.loss11 = Logits()
 
         if "imu" in self.list_modalities:
             self.imu_encoder = modality_to_encoder["imu"] #Student Model
@@ -103,16 +105,18 @@ class MultimodalContrastiveLearningModule(pl.LightningModule):
             y_key_modality = y[target_modality]
             lambda_kd = 1.0
             #celoss = self.loss(y_query_modality, y_key_modality)
-            #info_nceloss = self.loss1(query=y_query_modality, positive_key=y_key_modality)
+            info_nceloss = self.loss1(query=y_query_modality, positive_key=y_key_modality)
             #sploss = (self.loss2(fm_s= y_query_modality, fm_t = y_key_modality) + self.loss2(fm_s= y_query_modality, fm_t = y_key_modality) + self.loss2(fm_s= y_query_modality, fm_t = y_key_modality))/3.0 * lambda_kd
-            #nstloss = self.loss3(fm_s = y_query_modality, fm_t= y_key_modality) * lambda_kd
+            nstloss = self.loss3(fm_s = y_query_modality, fm_t= y_key_modality) * lambda_kd
             #atloss = (self.loss4(fm_s= y_query_modality, fm_t = y_key_modality) + self.loss4(fm_s= y_query_modality, fm_t = y_key_modality) + self.loss4(fm_s= y_query_modality, fm_t = y_key_modality))/3.0 * lambda_kd
             #ccloss = self.loss5(feat_s = y_query_modality, feat_t = y_key_modality) * lambda_kd
             #pktloss = self.loss6(feat_s = y_query_modality, feat_t = y_key_modality) * lambda_kd
             #rkdloss = self.loss7(feat_s = y_query_modality, feat_t = y_key_modality) * lambda_kd
             #fitnetloss = self.loss8(fm_s = y_query_modality, fm_t= y_key_modality) * lambda_kd
-            abloss = (self.loss9(fm_s= y_query_modality, fm_t = y_key_modality) + self.loss9(fm_s= y_query_modality, fm_t = y_key_modality) + self.loss9(fm_s= y_query_modality, fm_t = y_key_modality))/3.0 * lambda_kd
-            s2t_loss = abloss
+            #abloss = (self.loss9(fm_s= y_query_modality, fm_t = y_key_modality) + self.loss9(fm_s= y_query_modality, fm_t = y_key_modality) + self.loss9(fm_s= y_query_modality, fm_t = y_key_modality))/3.0 * lambda_kd
+            #stloss = self.loss10(out_s = y_query_modality, out_t = y_key_modality) * lambda_kd
+            #logitloss = self.loss11(out_s = y_query_modality, out_t = y_key_modality) * lambda_kd
+            s2t_loss = info_nceloss + nstloss
             loss_output += s2t_loss
             s_t_accuracy, t_s_accuracy = evaluate_batch_similarity(
                 y_query_modality, y_key_modality, device=self.device
@@ -150,15 +154,17 @@ class MultimodalContrastiveLearningModule(pl.LightningModule):
             y_key_modality = y[target_modality]
             lambda_kd = 1.0
             #celoss = self.loss(y_query_modality, y_key_modality)
-            #info_nceloss = self.loss1(query=y_query_modality, positive_key=y_key_modality)
+            info_nceloss = self.loss1(query=y_query_modality, positive_key=y_key_modality)
             #sploss = (self.loss2(fm_s= y_query_modality, fm_t = y_key_modality) + self.loss2(fm_s= y_query_modality, fm_t = y_key_modality) + self.loss2(fm_s= y_query_modality, fm_t = y_key_modality))/3.0 * lambda_kd
-            #nstloss = self.loss3(fm_s = y_query_modality, fm_t= y_key_modality) * lambda_kd
+            nstloss = self.loss3(fm_s = y_query_modality, fm_t= y_key_modality) * lambda_kd
             #atloss = (self.loss4(fm_s= y_query_modality, fm_t = y_key_modality) + self.loss4(fm_s= y_query_modality, fm_t = y_key_modality) + self.loss4(fm_s= y_query_modality, fm_t = y_key_modality))/3.0 * lambda_kd
             #ccloss = self.loss5(feat_s = y_query_modality, feat_t = y_key_modality) * lambda_kd
             #pktloss = self.loss6(feat_s = y_query_modality, feat_t = y_key_modality) * lambda_kd
             #fitnetloss = self.loss8(fm_s = y_query_modality, fm_t= y_key_modality) * lambda_kd
-            abloss = (self.loss9(fm_s= y_query_modality, fm_t = y_key_modality) + self.loss9(fm_s= y_query_modality, fm_t = y_key_modality) + self.loss9(fm_s= y_query_modality, fm_t = y_key_modality))/3.0 * lambda_kd
-            s2t_loss = abloss                
+            #abloss = (self.loss9(fm_s= y_query_modality, fm_t = y_key_modality) + self.loss9(fm_s= y_query_modality, fm_t = y_key_modality) + self.loss9(fm_s= y_query_modality, fm_t = y_key_modality))/3.0 * lambda_kd
+            #stloss = self.loss10(out_s = y_query_modality, out_t = y_key_modality) * lambda_kd
+            #logitloss = self.loss11(out_s = y_query_modality, out_t = y_key_modality) * lambda_kd
+            s2t_loss = info_nceloss + nstloss         
             str_s2t = "{source_modality_initial}2{target_modality_initial}".format(
                 source_modality_initial=self.source_modality[0],
                 target_modality_initial=target_modality[0],
