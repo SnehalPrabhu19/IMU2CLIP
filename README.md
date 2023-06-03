@@ -1,4 +1,4 @@
-PFA 696DS Final Report for reference.
+PFA 696DS_Final_Report.pdf for reference.
 
 ## IMU2CLIP
 
